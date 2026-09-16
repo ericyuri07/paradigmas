@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Override;
 
 class CreateUserRequest extends FormRequest
 {
@@ -43,6 +42,6 @@ class CreateUserRequest extends FormRequest
             'password.string' => 'O campo senha deve ser um texto.',
             'password.min' => 'O campo senha deve conter no mínimo :min caracteres',
             'password.max' => 'O campo senha deve conter no máximo :max caracteres',
-        ];       
+        ];
     }
 }

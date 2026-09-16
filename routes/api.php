@@ -1,12 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\UserController;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request as FacadesRequest;
+use App\Http\Controllers\Api\ClassroomController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/health', function() {
+Route::get('/health', function () {
     return response()->json('Minha API está online!');
 });
 
@@ -20,3 +18,4 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 // Equivale a isso
 Route::apiResource('/users', UserController::class);
+Route::apiResource('/classrooms', ClassroomController::class);
