@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ClassroomRequest;
+use App\Http\Resources\ClassroomResource;
+use App\Http\Services\ClassroomService;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
@@ -10,17 +13,21 @@ class ClassroomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    public function __construct(private ClassroomService $classroomService)
     {
-        //
+    }
+    public function index(Request $request)
+    {
+        return ClassroomResource::collection($this->classroomService->index($request->all()));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ClassroomRequest $request)
     {
-        //
+        return new ClassroomResource($this->classroomService->store($request->validated()));
     }
 
     /**
@@ -28,7 +35,8 @@ class ClassroomController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return new ClassroomResource($this->classroomService->show($id));
+
     }
 
 
@@ -37,7 +45,7 @@ class ClassroomController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return new ClassroomResource($this->classroomService->show($id));
     }
 
     /**
