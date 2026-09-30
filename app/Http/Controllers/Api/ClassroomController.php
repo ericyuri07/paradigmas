@@ -10,16 +10,16 @@ use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
     public function __construct(private ClassroomService $classroomService)
     {
     }
+
+    /**
+     * Display a listing of the resource.
+     */
     public function index(Request $request)
     {
-        return ClassroomResource::collection($this->classroomService->index($request->all()));
+        return ClassroomResource::collection($this->classroomService->getWithFilters($request->all()));
     }
 
     /**
@@ -36,16 +36,14 @@ class ClassroomController extends Controller
     public function show(string $id)
     {
         return new ClassroomResource($this->classroomService->show($id));
-
     }
-
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ClassroomRequest $request, string $id)
     {
-        return new ClassroomResource($this->classroomService->show($id));
+        return new ClassroomResource($this->classroomService->update($request->validated(), $id));
     }
 
     /**
@@ -53,6 +51,8 @@ class ClassroomController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->classroomService->destroy($id);
+
+        return response()->noContent();
     }
 }

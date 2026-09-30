@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return UserResource::collection($this->userService->index($request->all()));
+        return UserResource::collection($this->userService->getWithFilters($request->all()));
     }
 
     /**
